@@ -11,8 +11,10 @@ ls
 ## How to copy files
 
 ```sh
+cd ~
 # important not to use tilda, it affects `--parents`
 cp -r --parents .config/copyq ~/dotfiles
+cd dotfiles
 stow --adopt .
 
 # alternative
