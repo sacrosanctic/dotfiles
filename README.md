@@ -8,7 +8,7 @@ stow .
 ls
 ```
 
-## How to copy files
+## How symlink files
 
 ```sh
 cd ~
