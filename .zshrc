@@ -74,3 +74,10 @@ export _ZO_DOCTOR=0
 # must be last
 eval "$(zoxide init --cmd cd zsh)"
 
+echo "\
+-- QUICK KEYS --
+[1mCtrl-A / E[0m : Jump Start/End
+[1mCtrl-B / F[0m : Move Back/Forward
+[1mCtrl-R[0m     : FZF History
+[1mCtrl-N / P[0m : Suggestion Next/Prev
+"
