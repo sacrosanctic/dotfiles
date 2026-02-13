@@ -19,6 +19,7 @@ zinit snippet OMZP::sudo
 autoload -Uz compinit && compinit
 zinit cdreplay -q
 
+eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/base.toml)"
 
 bindkey -e
 bindkey '^p' history-search-backward
@@ -49,7 +50,8 @@ alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
 alias r='alacritty & disown && exit'
-
+alias keep-wake='systemd-inhibit sleep infinity'
+alias rg='rg -S'
 # Shell integrations
 eval "$(pnpm completion zsh)"
 eval "$(direnv hook zsh)"
