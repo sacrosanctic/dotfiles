@@ -1,6 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["@sveltejs/opencode"],
+  "plugin": [
+    "@sveltejs/opencode"
+  ],
   "mcp": {
     "Better Auth": {
       "enabled": true,
@@ -10,7 +12,8 @@
     "nixos": {
       "enabled": true,
       "type": "local",
-      "command": ["nix",
+      "command": [
+        "nix",
         "run",
         "github:utensils/mcp-nixos",
         "--"
@@ -18,10 +21,31 @@
     },
     "ESLint": {
       "enabled": true,
-       "type": "local",
-      "command": ["pnpm",
+      "type": "local",
+      "command": [
+        "pnpm",
         "dlx",
         "@eslint/mcp"
       ]
-  }
-}}
+    }
+  },
+  "provider": {
+    "local": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://homelab.scottwu.ca:11434/v1",
+      },
+      "models": {
+        "mistral:7b": {
+          "name": "Mistral 7B"
+        },
+        "llama3.2:3b": {
+          "name": "Llama 3.2 3B"
+        },
+        "qwen3:8b": {
+          "name": "Qwen 3 8B"
+        }
+      }
+    }
+  },
+}

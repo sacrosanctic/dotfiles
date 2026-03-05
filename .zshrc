@@ -25,6 +25,14 @@ bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 
+# edit line in an editor
+export EDITOR='vim'
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+# set this to v on vi mode
+# bindkey -M vicmd 'v' edit-command-line
+
 # History
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
@@ -52,8 +60,29 @@ alias c='clear'
 alias r='alacritty & disown && exit'
 alias keep-wake='systemd-inhibit sleep infinity'
 alias rg='rg -S'
-# Shell integrations
-eval "$(pnpm completion zsh)"
+alias fman='print -l ${commands:t} | fzf | xargs man'
+pkg-update() {
+  # 1. Get the selections and store them in a variable
+  local selected_pkgs=$(pnpm outdated --format json --silent | \
+    jq -r 'to_entries[] | "\(.key) \(.value.current) -> \(.value.latest)"' | \
+    column -t | \
+    fzf -m --bind 'ctrl-a:select-all' --header "Tab: Select | Ctrl-A: All | Enter: Install" | \
+    awk '{print $1 "@" $4}')
+
+  # 2. Check if the selection is empty (user hit ESC or didn't select)
+  if [ -n "$selected_pkgs" ]; then
+    # 3. Join the packages into a single line for the log
+    local install_cmd="pnpm add $(echo $selected_pkgs | xargs)"
+
+    echo -e "\n\033[1;32mRunning:\033[0m $install_cmd\n"
+
+    # 4. Execute the command
+    eval "$install_cmd"
+  else
+    echo "No packages selected."
+  fi
+}
+
 eval "$(direnv hook zsh)"
 eval "$(gh completion -s zsh)"
 eval "$(fzf --zsh)"
