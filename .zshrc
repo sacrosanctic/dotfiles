@@ -102,7 +102,10 @@ esac
 
 # Shadow pnpm patch to use pnpm-patch-i for interactive editing
 pnpm() {
-  if [[ "$1" == "patch" && "$2" != "-h" && "$2" != "--help" ]]; then
+  if [[ "$1" == "outdated" ]]; then
+    shift
+    command pnpm dlx taze "$@"
+  elif [[ "$1" == "patch" && "$2" != "-h" && "$2" != "--help" ]]; then
     command pnpm dlx pnpm-patch-i "${@:2}"
   else
     command pnpm "$@"
