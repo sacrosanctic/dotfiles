@@ -7,7 +7,15 @@ description: Patch third-party packages directly with customized fixes
 
 pnpm's patching feature lets you modify third-party packages directly. Useful for applying fixes before upstream releases or customizing package behavior.
 
-## Creating a Patch
+## Interactive Workflow - **Recommended**
+
+> **Tip**: For a smoother experience, use [pnpm-patch-i](https://github.com/antfu/pnpm-patch-i) - an interactive CLI that automates the patch → edit → commit workflow in one command. It opens the editor directly in the patched files rather than a temp directory.
+
+```bash
+pnpm dlx pnpm-patch-i express@4.18.2
+```
+
+## Manual Workflow
 
 ### Step 1: Initialize Patch
 

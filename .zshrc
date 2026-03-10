@@ -100,6 +100,15 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+# Shadow pnpm patch to use pnpm-patch-i for interactive editing
+pnpm() {
+  if [[ "$1" == "patch" && "$2" != "-h" && "$2" != "--help" ]]; then
+    command pnpm dlx pnpm-patch-i "${@:2}"
+  else
+    command pnpm "$@"
+  fi
+}
+
 # Silence the warning if NixOS appends stuff later
 export _ZO_DOCTOR=0
 # must be last
