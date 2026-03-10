@@ -153,7 +153,24 @@ catalog:
 # "dependencies": { "@myorg/utils": "workspace:^" }
 ```
 
+**Suggested names for catalogs**
+
+| Catalog    | Purpose                 | Examples                 |
+| ---------- | ----------------------- | ------------------------ |
+| `frontend` | Frontend runtime deps   | vue, react, pinia        |
+| `prod`     | Backend/production deps | zod, cac, server libs    |
+| `test`     | Testing tools           | vitest, playwright, msw  |
+| `lint`     | Linting/formatting      | eslint, prettier         |
+| `build`    | Build tools             | vite, rollup, tsup       |
+| `types`    | Type definitions        | @types/node              |
+| `inlined`  | Bundle-inline deps      | vue, react (if bundling) |
+
+Adjust categories based on your project needs.
+
+```
+
 <!-- 
 Source references:
 - https://pnpm.io/catalogs
+- https://antfu.me/posts/categorize-deps
 -->
